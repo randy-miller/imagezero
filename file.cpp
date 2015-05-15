@@ -31,9 +31,9 @@ InputFile::InputFile(const char *filename)
         struct stat sb;
         fstat(fd, &sb);
         d->size = sb.st_size;
-        d->addr = mmap(0, d->size, PROT_READ, MAP_PRIVATE | MAP_POPULATE, fd, 0);
+        d->addr = mmap(0, d->size, PROT_READ, MAP_PRIVATE, fd, 0);
         if (d->addr == MAP_FAILED) {
-            d->addr = mmap(0, d->size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+            d->addr = mmap(0, d->size, PROT_READ | PROT_WRITE, MAP_PRIVATE, -1, 0);
             if (d->addr != MAP_FAILED) {
                 read(fd, d->addr, d->size);
             }
